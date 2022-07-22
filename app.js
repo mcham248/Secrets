@@ -111,7 +111,7 @@ app.route("/auth/google/secrets")
 
 //facebook
 app.route("/auth/facebook")
-  .get(passport.authenticate("facebook"));
+  .get(passport.authenticate("facebook", { scope: 'public_profile'}));
 
 app.route("/auth/facebook/secrets")
   .get(passport.authenticate("facebook", {
@@ -194,6 +194,16 @@ app.route("/secrets")
     }
   });
 
+
+//submit
+app.route("/submit")
+  .get(function(req, res) {
+    if (req.isAuthenticated()) {
+      res.render("/submit");
+    } else {
+      res.redirect("/login");
+    }
+  });
 
 
 
